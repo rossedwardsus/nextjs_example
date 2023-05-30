@@ -5,8 +5,20 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-export default function Home(req, res) {
+import { useRouter } from 'next/navigation';
 
+//import { NextResponse } from 'next/server';
+//import type { NextRequest } from 'next/server'
+
+export default function Home(request, res) {
+
+  const router = useRouter();
+
+  //const url = request.nextUrl.clone()   
+  //if (url.pathname === '/') {
+    //url.pathname = '/userquestions';
+    //return NextResponse.redirect(url);   
+  //} 
 
   const schema = yup.object({
     firstName: yup.string().required(),
@@ -16,8 +28,16 @@ export default function Home(req, res) {
   const { register, handleSubmit, formState:{ errors } } = useForm({
     resolver: yupResolver(schema)
   });
-  const onSubmit = data => console.log(data);
-  //submit to firebase and redirect to users questions
+  const onSubmit = data => {
+      console.log(data);
+
+      //url.pathname = '/userquestions';
+      //return NextResponse.redirect(url);   
+
+      router.push('/userquestions');
+
+      //submit to firebase and redirect to users questions
+  }
 
       
  return (
@@ -35,7 +55,8 @@ export default function Home(req, res) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input {...register("firstName")} />
             <p>{errors.firstName?.message}</p>
-              
+            <br/>
+            <br/>
             <input {...register("age")} />
             <p>{errors.age?.message}</p>
             
