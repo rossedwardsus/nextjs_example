@@ -1,8 +1,13 @@
 import Image from 'next/image';
 import Head from 'next/head';
 import '../../globals.css';
+import Link from 'next/link';
+import { Suspense } from 'react';
 
 export default function Home({params}) {
+
+  const question =  {comment_id: 1, comment: "a comment", comments: [{comment_id: 1, comment: "c"}]};
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
 
@@ -19,19 +24,25 @@ export default function Home({params}) {
       <h1>iPhones for Sale</h1>
       <p>insert a list of iPhones for sale. view question{JSON.stringify(params)}</p>
 
+      <Suspense>
+        <>question username</>
+      </Suspense>
+      
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        comments
+        comments{JSON.stringify(question.comments)}
         <br/>
-        {[{comment_id: 1, comment: "a comment"}].map((comment) =>
-
+        {question.comments.map((comment) => 
             <>
-                {comment.comment_id}
+                <>comment username</>
+                {JSON.stringify(comment)}
                 <br/>
                 {comment.comment}
             </>
 
         )}
-        
+
+        <br/>
+        <Link href="/clientuserquestionaddcomment">question add comment</Link>
 
       </div>
 
