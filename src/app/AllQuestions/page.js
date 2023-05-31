@@ -32,6 +32,8 @@ export default function Home() {
             <Link href="/viewquestion">view question</Link>
             <br/>
             <Link href="/clientuseraskquestion">ask question</Link>
+            <br/>
+            <Link href="/clientuserquestionaddcomment">question add comment</Link>
           </>
        
        )}
